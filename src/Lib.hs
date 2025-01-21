@@ -1,12 +1,12 @@
 -- the main resulting functions, as described in `wyliczenia.pdf`
-module Lib (u) where
+module Lib (u, wWeights) where
 
 import Compose (weights, Weights, applyWeights)
 import Matrix (solveTridiagonal)
 import Integrate (integrateSpikes)
 
-u :: Int -> Double -> Double
-u n x = w n x + ushift
+u :: Weights Double -> Double -> Double
+u ws x = applyWeights ws x + ushift
 
 k :: RealFloat a => a -> a 
 k x
@@ -16,9 +16,6 @@ k x
 
 ushift :: RealFloat a => a
 ushift = 3
-
-w :: RealFloat a => Int -> a -> a 
-w n = applyWeights (wWeights n)
 
 wWeights :: RealFloat a => Int -> Weights a
 wWeights n = 

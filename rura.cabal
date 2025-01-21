@@ -6,6 +6,8 @@ cabal-version: 1.12
 
 name:           rura
 version:        0.1.0.0
+license:        MIT
+license-file:   LICENSE
 build-type:     Simple
 
 library

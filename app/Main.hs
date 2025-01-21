@@ -2,7 +2,7 @@ module Main (main) where
 
 import System.Environment (getArgs)
 
-import Lib (u)
+import Lib (u, wWeights)
 
 import Graphics.Gnuplot.Simple (plotFunc, linearScale)
 
@@ -25,12 +25,13 @@ main :: IO ()
 main = do 
   args <- getArgs
   let n = parseArgs args :: Int
-  let resFn = u n 
+  let resWeights = wWeights n
+  let resFn = u resWeights 
   -- check if the boundary conditions are correct
   print $ (resFn 2, resFn 0 + (resFn (2/fromIntegral n) - resFn 0) / (2/fromIntegral n))
   -- plot the resulting function
-  plotFunc [] (linearScale (toInteger n * 10) (0,2)) $ resFn
+  plotFunc [] (linearScale (max 100 (toInteger n)) (0,2)) $ resFn
   -- wait for user input before exiting,
-  -- if we don't do this the plot sometimes doesn't show up on time
+  -- if we don't do this the plot sometimes doesn't show up on time for big `n`s
   _ <- getChar
   return ()
