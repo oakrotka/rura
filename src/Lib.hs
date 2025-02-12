@@ -11,7 +11,7 @@ u ws x = applyWeights ws x + ushift
 k :: RealFloat a => a -> a 
 k x
   | 0 <= x && x <= 1 = 1 
-  |           x <= 2 = 2
+  | 1 <  x && x <= 2 = 2
   | otherwise = error "x out of range when calling k"
 
 ushift :: RealFloat a => a
